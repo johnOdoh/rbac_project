@@ -18,7 +18,12 @@ class User extends Authenticatable implements OAuthenticatable
      *
      * @var list<string>
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role_id'
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -39,6 +44,16 @@ class User extends Authenticatable implements OAuthenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function is_authorized($permission)
+    {
+        return $this->role?->permissions()->where('name', $permission)->exists();
     }
 
 }
