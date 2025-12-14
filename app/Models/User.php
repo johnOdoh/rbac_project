@@ -22,7 +22,8 @@ class User extends Authenticatable implements OAuthenticatable
         'name',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'is_super_admin'
     ];
 
     /**
@@ -43,6 +44,7 @@ class User extends Authenticatable implements OAuthenticatable
     {
         return [
             'password' => 'hashed',
+            'is_super_admin' => 'boolean'
         ];
     }
 

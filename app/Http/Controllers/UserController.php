@@ -98,6 +98,14 @@ class UserController extends Controller
 
     public function assignPermission(Request $request, Role $role)
     {
+        if(!$request->user()->is_super_admin) {
+            return response()->json([
+                'success' => false,
+                'code' => 400,
+                'data' => [],
+                'message' => 'You are not authorized to perform this action'
+            ], 400);
+        }
         $role->permissions()->sync($request->permissions);
         return response()->json([
             'success' => true,
@@ -109,6 +117,14 @@ class UserController extends Controller
 
     public function assignRole(Request $request, User $user)
     {
+        if(!$request->user()->is_super_admin) {
+            return response()->json([
+                'success' => false,
+                'code' => 400,
+                'data' => [],
+                'message' => 'You are not authorized to perform this action'
+            ], 400);
+        }
         $user->role_id = $request->role_id;
         $user->save();
         return response()->json([

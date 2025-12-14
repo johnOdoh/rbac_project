@@ -19,9 +19,7 @@ Route::middleware('auth:api')->group(function () {
         ->middleware('isAuthorized:update_user');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])
         ->middleware('isAuthorized:delete_user');
-    Route::post('/assign-permission/{role}', [UserController::class, 'assignPermission'])
-        ->middleware('isAuthorized:assign_permission');
-    Route::post('/assign-role/{user}', [UserController::class, 'assignRole'])
-        ->middleware('isAuthorized:assign_role');
+    Route::post('/assign-permission/{role}', [UserController::class, 'assignPermission']);
+    Route::post('/assign-role/{user}', [UserController::class, 'assignRole']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
