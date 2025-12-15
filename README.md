@@ -17,12 +17,11 @@ It provides authentication and authorization features where users are assigned a
 1. **Clone the repository**
    git clone [https://github.com/your-username/rbac-api.git](https://github.com/johnOdoh/rbac_project.git)
 
-2. **Run migrations and seed db**
-    -php artisan migrate
-    -php artisan db:seed
+2. To run migrations and seed db run 
+    **php artisan migrate** and
+    **php artisan db:seed**
 
-3. **Generate Laravel Passport keys**
-    To generate passport keys for managing your tokens run php artisan passport:keys
+3. To generate passport keys for managing your tokens run **php artisan passport:keys**
 
 4. Run **php artisan passport:client --personal** to be able to create access tokens
 
