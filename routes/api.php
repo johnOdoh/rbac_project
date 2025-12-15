@@ -8,6 +8,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 });
+Route::get('/external/users', [UserController::class, 'getUsers']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/user', [UserController::class, 'index'])

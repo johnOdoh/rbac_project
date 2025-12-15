@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -132,6 +133,28 @@ class UserController extends Controller
             'code' => 200,
             'data' => [],
             'message' => 'Role assigned successfully'
+        ]);
+    }
+
+    public function getUsers()
+    {
+        $response = Http::withHeader('Content-Type', 'application/json')
+            ->get('https://jsonplaceholder.typicode.com/users');
+
+        if (!$response->successful()) {
+            return response()->json([
+                'success' => false,
+                'code' => 400,
+                'data' => [],
+                'message' => 'An unexpected error occurred'
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'code' => 200,
+            'data' => $response->json(),
+            'message' => 'User retrieved successfully'
         ]);
     }
 }
